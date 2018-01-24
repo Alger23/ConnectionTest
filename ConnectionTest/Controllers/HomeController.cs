@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using ConnectionTest.Models;
 
 namespace ConnectionTest.Controllers
 {
@@ -28,16 +29,16 @@ namespace ConnectionTest.Controllers
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
                     var ds = new DataSet();
-                    adapter.Fill(ds, "table");
+                    adapter.Fill(ds);
 
-                    return PartialView("QueryResult", ds.Tables[0]);
+                    return PartialView("QueryResult", ds);
                 }
             }
             catch (Exception e)
             {
                 ViewBag.ErrorMessage = e.Message;
 
-                return PartialView("QueryResult", new DataTable());
+                return PartialView("QueryResult", new DataSet());
             }
         }
     }

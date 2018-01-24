@@ -1,4 +1,4 @@
-﻿namespace ConnectionTest.Controllers
+﻿namespace ConnectionTest.Models
 {
     public class QueryModel
     {

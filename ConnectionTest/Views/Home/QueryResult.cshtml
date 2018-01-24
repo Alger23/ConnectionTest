@@ -1,20 +1,26 @@
-﻿@model System.Data.DataTable
+﻿@using System.Data
+@model System.Data.DataSet
 
-<div class="alert alert-danger" role="alert">
-    @ViewBag.ErrorMessage
-</div>
+@if (@ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
 
-<table border="1" cellpadding="5">
-    <thead>
+@foreach (DataTable dt in Model.Tables)
+{
+    <table border="1" cellpadding="5">
+        <thead>
         <tr>
-            @foreach (System.Data.DataColumn col in Model.Columns)
+            @foreach (System.Data.DataColumn col in dt.Columns)
             {
                 <th>@col.Caption</th>
             }
         </tr>
-    </thead>
-    <tbody>
-        @foreach (System.Data.DataRow row in Model.Rows)
+        </thead>
+        <tbody>
+        @foreach (System.Data.DataRow row in dt.Rows)
         {
             <tr>
                 @foreach (var cell in row.ItemArray)
@@ -23,5 +29,7 @@
                 }
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    <br/>
+}

@@ -143,9 +143,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IpHelper.cs" />
-    <Compile Include="Controllers\QueryModel.cs" />
-    <Compile Include="Controllers\TestModel.cs" />
+    <Compile Include="Models\IpHelper.cs" />
+    <Compile Include="Models\QueryModel.cs" />
+    <Compile Include="Models\TestModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,7 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace ConnectionTest.Controllers
+namespace ConnectionTest.Models
 {
     public static class IpHelper
     {
