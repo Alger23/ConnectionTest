@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data;
+using System.Data.SqlClient;
 using System.Web.Mvc;
 
 namespace ConnectionTest.Controllers
@@ -10,21 +9,36 @@ namespace ConnectionTest.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new TestModel {Ip = IpHelper.IPv4 };
+
+            return View(model);
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Query(QueryModel query)
         {
-            ViewBag.Message = "Your application description page.";
+            try
+            {
+                using (var conn = new SqlConnection(query.ConnectionString))
+                {
+                    conn.Open();
+                    var cmd = conn.CreateCommand();
+                    cmd.CommandText = query.Sql;
+                    cmd.CommandTimeout = 5;
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
-            return View();
-        }
+                    var ds = new DataSet();
+                    adapter.Fill(ds, "table");
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+                    return PartialView("QueryResult", ds.Tables[0]);
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.ErrorMessage = e.Message;
 
-            return View();
+                return PartialView("QueryResult", new DataTable());
+            }
         }
     }
 }
